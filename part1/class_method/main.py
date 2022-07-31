@@ -43,18 +43,20 @@ class Storage:
     goods_quantity = 10
 
     def __init__(self, qnt):
-        # TODO напишите Ваш код здесь
-        # self.goods_quantity =                    # Оставим эту строчку для Вас в качестве подсказки
-        pass
+        if qnt < self._get_total():
+            self._set_total(self._get_total() - qnt)
+            self.goods_quantity = qnt  # Оставим эту строчку для Вас в качестве подсказки
+        else:
+            self.goods_quantity = self._get_total()
+            self._set_total(0)
+
     @classmethod
     def _get_total(cls):
-        # TODO напишите Ваш код здесь
-        pass
+        return cls.goods_quantity
 
     @classmethod
     def _set_total(cls, qnt):
-        # TODO напишите Ваш код здесь
-        pass
+        cls.goods_quantity = qnt
 
 
 # Как закончите писать код, запустите его, 
@@ -75,4 +77,3 @@ if __name__ == '__main__':
     print("Осталось на складе: ", Storage.goods_quantity)
     print("Отгрузили со склада в экземпляр класса:", python.goods_quantity)
     print('=' * 20)
-
