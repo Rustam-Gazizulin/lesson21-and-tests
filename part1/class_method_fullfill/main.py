@@ -22,7 +22,7 @@ class Storage:
     @classmethod
     def _set_total(cls, qnt):
         cls.goods_quantity = qnt
-    
+
     def more(self, qnt):
         if qnt < self._get_total():
             self._set_total(self._get_total() - qnt)
@@ -30,7 +30,7 @@ class Storage:
         else:
             self.goods_quantity = self._get_total()
             self._set_total(0)
-    
+
     def less(self, qnt):
         if qnt < self.goods_quantity:
             self.goods_quantity = (self.goods_quantity - qnt)
@@ -40,8 +40,8 @@ class Storage:
             self.goods_quantity = 0
 
     def fullfill(self):
-        # TODO напишите функцию здесь
-        pass
+        self.goods_quantity = self.goods_quantity + self._get_total()
+        self._set_total(0)
 
 
 # Посмотрите, что происходит с классом при применении различных методов.
@@ -56,3 +56,10 @@ if __name__ == '__main__':
     python.fullfill()
     print("Осталось на складе:", Storage.goods_quantity)
     print("Имеется в экземпляре:", python.goods_quantity)
+    print("Возвращаем на склад 3 ед.")
+    python.less(qnt=3)
+    print('Остаток на складе', Storage.goods_quantity)
+    print("Всего отгрузили", python.goods_quantity)
+    print('Новый покупатель взял 2 ед')
+    python2 = Storage(qnt=2)
+    print('Остаток на складе', Storage.goods_quantity)
