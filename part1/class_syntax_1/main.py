@@ -24,9 +24,15 @@
 # Cумма: 410
 
 class Item:
-    def __init__(self, title, price):
+
+    def __init__(self, title, price, unit, quantity):
         self.title = title
         self.price = price
+        self.unit = unit
+        self.quantity = quantity
+
+    def total_price(self):
+        return self.price * self.quantity
 
 
 class Cheque:
@@ -34,12 +40,17 @@ class Cheque:
         self.items = []
 
     def purchases(self):
-        return "\n".join([f"{item.title} - {item.price}" for item in self.items])
-    
+        return "\n".join([f"{item.title}, {item.quantity}{item.unit} - {item.total_price()}" for item in self.items])
+
     def get_sum(self):
-        cheque_sum = sum([item.price for item in self.items])
+        cheque_sum = sum([item.total_price() for item in self.items])
         return f"Сумма: {cheque_sum}"
-    
+
+    def add_item(self, title, price, unit, quantity):
+        item = Item(title=title, price=price, unit=unit, quantity=quantity)
+        self.items.append(item)
+
+
 # Это проверочный код, запустите файл, чтобы увидеть логику работы классов
 if __name__ == '__main__':
     # Создаём чек
@@ -49,5 +60,7 @@ if __name__ == '__main__':
     cheque.add_item(title='Книги про PHP', price=700, unit='шт', quantity=3)
     cheque.add_item(title='Кофе плохорастворенный', price=200, unit='л', quantity=0.2)
     # Печатаем чек
+
+
     print(cheque.purchases())
     print(cheque.get_sum())
