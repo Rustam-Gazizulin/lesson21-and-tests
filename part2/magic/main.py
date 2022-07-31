@@ -4,13 +4,15 @@
 #    Будем ожидать что при вызове print(items) выведется строка вида: 
 #    "Жареные питоны, 0.3 г, 150.0 руб." (В качестве цены здесь понимается стоимость товара с учетом его количества)
 # 2. Магические методы, позволяющие сравнить между собой объекты по цене:
-#    - __gt__
-#    - __ge__
-#    - __lt__
-#    - __le__
-#    - __eq__
-#    - __ne__
- 
+#    - __gt__ – для оператора больше >
+#    - __ge__ для оператора больше или равно >=
+#    - __lt__ – для оператора меньше <
+#    - __le__ – для оператора меньше или равно <=
+#    - __eq__ – для равенства ==
+#    - __ne__ – для неравенства !=
+
+
+
 
 class Item:
     def __init__(self, title, unit, price_for_unit, quantity):
@@ -24,25 +26,25 @@ class Item:
         return price
 
     def __repr__(self):
-        pass
+        return f'{self.title}, {self.quantity} {self.unit}, {self.total_price()} руб.'
 
     def __eq__(self, other):
-        pass
+        return self.total_price() == other.total_price()
 
     def __ne__(self, other):
-        pass
+        return self.total_price() != other.total_price()
 
     def __gt__(self, other):
-        pass
+        return self.total_price() > other.total_price()
 
     def __ge__(self, other):
-        pass
+        return self.total_price() >= other.total_price()
 
     def __lt__(self, other):
-        pass
+        return self.total_price() < other.total_price()
 
     def __le__(self, other):
-        pass
+        return self.total_price() <= other.total_price()
 
 
 # Здесь код для самопроверки, 
