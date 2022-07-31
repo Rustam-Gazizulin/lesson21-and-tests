@@ -33,3 +33,65 @@ class Wallet:
 
     def __le__(self, other):
         return self.bronze_converter() <= other.bronze_converter()
+
+
+if __name__ == '__main__':
+    big_wallet = Wallet(
+        gold=5
+    )
+
+    medium_wallet = Wallet(
+        gold=2,
+        silver=7,
+        bronze=72
+    )
+
+    small_wallet = Wallet(
+        bronze=100
+    )
+
+    small_silver_wallet = Wallet(
+        silver=1
+    )
+
+    big_silver_wallet = Wallet(
+        silver=50
+    )
+
+
+    def true_lie(assertion):
+        if assertion:
+            return "Правда"
+        return "Ложь"
+
+
+    print(
+        f" {big_wallet} == {big_silver_wallet}",
+        true_lie(big_wallet == big_silver_wallet))
+    print(
+        f" {small_silver_wallet} == {small_wallet}",
+        true_lie(small_silver_wallet != small_wallet))
+    print(
+        f" {medium_wallet} > {small_wallet}",
+        true_lie(medium_wallet > small_wallet)
+    )
+    print(
+        f" {small_silver_wallet} < {big_silver_wallet}",
+        true_lie(small_silver_wallet < big_silver_wallet)
+    )
+    print(
+        f" {big_wallet} <= {big_silver_wallet}",
+        true_lie(big_wallet <= big_wallet)
+    )
+    print(
+        f" {small_wallet} <= {big_wallet}",
+        true_lie(small_wallet <= big_wallet)
+    )
+    print(
+        f" {big_wallet} >= {big_silver_wallet}",
+        true_lie(big_wallet >= big_silver_wallet)
+    )
+    print(
+        f" {big_wallet} >= {medium_wallet}",
+        true_lie(big_wallet >= medium_wallet)
+    )

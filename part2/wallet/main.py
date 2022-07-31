@@ -14,26 +14,35 @@ class Wallet:
         self.silver = silver
         self.bronze = bronze
 
+    def get_count(self):
+        gold = 0
+        silver = 0
+        if self.gold:
+            gold = self.gold * 1000
+        if self.silver:
+            silver = self.silver * 100
+        return self.bronze + gold + silver
+
     def __repr__(self):
         return f'З: {self.gold}, С: {self.silver}, Б: {self.bronze}'
 
     def __eq__(self, other):
-        pass
+        return self.get_count() == other.get_count()
 
     def __ne__(self, other):
-        pass
+        return self.get_count() != other.get_count()
 
     def __gt__(self, other):
-        pass
+        return self.get_count() > other.get_count()
 
     def __ge__(self, other):
-        pass
+        return self.get_count() >= other.get_count()
 
     def __lt__(self, other):
-        pass
+        return self.get_count() < other.get_count()
 
     def __le__(self, other):
-        pass
+        return self.get_count() <= other.get_count()
 
 
 # Здесь код для самопроверки, 
@@ -72,8 +81,8 @@ if __name__ == '__main__':
         f" {big_wallet} == {big_silver_wallet}", 
         true_lie(big_wallet == big_silver_wallet))
     print(
-        f" {small_silver_wallet} == {small_wallet}", 
-        true_lie(small_silver_wallet != small_wallet))
+        f" {small_silver_wallet} == {big_silver_wallet}",
+        true_lie(small_silver_wallet != big_silver_wallet))
     print(
         f" {medium_wallet} > {small_wallet}", 
         true_lie(medium_wallet > small_wallet)
