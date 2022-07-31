@@ -30,18 +30,24 @@ def check_item(store, title):
 
 
 class Store:
-    def add_item(self, store, title, quantity):
-        store[title] = store.get(title, 0) + quantity
+    def __init__(self):
+        self.store = {}
 
-    def get_item(self, store, title, quantity):
-        if not check_item(store=store, title=title):
+    def add_item(self, title: str, quantity: int):
+        self.store[title] = self.store.get(title, 0) + quantity
+
+    def get_item(self, title, quantity):
+        if not self._check_item(title=title):
             return 'Не было на складе'
-        quantity = self._check_quantity_limits(store=store, title=title, quantity=quantity)
-        store[title] -= quantity
+        quantity = self._check_quantity_limits(title=title, quantity=quantity)
+        self.store[title] -= quantity
         return title, quantity
 
-    def _check_quantity_limits(self, store, title, quantity):
-        current_qnt = store[title]
+    def _check_item(self, title: str):
+        return title in self.store
+
+    def _check_quantity_limits(self, title: str, quantity: int) -> int:
+        current_qnt = self.store[title]
         if current_qnt < quantity:
             quantity = current_qnt
         return quantity
@@ -53,7 +59,9 @@ if __name__ == '__main__':
     my_store.add_item(title='Сушеные питоны', quantity=10)
     my_store.add_item(title='Сушеные питоны', quantity=10)
     my_store.add_item(title='Сырые питоны', quantity=5)
+    my_store.add_item(title='Сырые питоны', quantity=15)
     print(my_store.get_item(title='Сушеные питоны', quantity=20))
+    print(my_store.get_item(title='Сырые питоны', quantity=10))
     print(my_store.get_item(title='Сырые питоны', quantity=10))
     print(my_store.get_item(title='Сырые питоны', quantity=10))
     print(my_store.get_item(title='Админские барабаны', quantity=7))
